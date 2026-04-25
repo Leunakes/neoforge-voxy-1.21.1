@@ -1,4 +1,5 @@
-Actually built it using Claude Code. I told it also to make some instructions for you to replicate all I did. Also, if you see some glitches in the distance, try 1024 render distance for Voxy...
+Actually built it using Claude Code. I told it also to make some instructions for you to replicate all I did. 
+Also, if you see some glitches in the distance, try 1024 render distance for Voxy...
 
 
 

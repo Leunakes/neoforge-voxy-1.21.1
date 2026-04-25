@@ -1,0 +1,140 @@
+Actually built it using Claude Code. I told it also to make some instructions for you to replicate all I did. Also, if you see some glitches in the distance, try 1024 render distance for Voxy...
+
+
+
+The original mod only supports Fabric, and there is no official
+NeoForge port. This guide explains how to build it yourself for 1.21.1 and run
+it on NeoForge using Sinytra Connector.
+Tested and working on NeoForge 21.1.228 + Minecraft 1.21.1.
+---
+## TL;DR — Minimum requirements to run Voxy on NeoForge 1.21.1
+If you already have the built JAR, you only need these 4 mods:
+| Mod                  | Version               | Where to get                                    |
+|----------------------|-----------------------|-------------------------------------------------|
+| Voxy                 | 0.2.14-alpha          | Build it yourself (see guide below)             |
+| Sinytra Connector    | 2.0.0-beta.14+1.21.1  | https://modrinth.com/mod/connector              |
+| Forgified Fabric API | 0.116.7+2.2.4+1.21.1  | https://modrinth.com/mod/forgified-fabric-api   |
+| Sodium               | 0.6.13+mc1.21.1       | https://modrinth.com/mod/sodium (NeoForge ver.) |
+
+IMPORTANT: Use the NeoForge version of Sodium, NOT the Fabric version.
+Do NOT have both at the same time or the game will crash.
+These 4 mods are all you need. Everything else is optional.
+
+
+## What you need to build Voxy
+- Java 21 JDK
+- Git
+
+
+
+## Step 1 — Install Java 21
+You need JDK 21 to compile the mod.
+**Arch Linux / CachyOS:**
+sudo pacman -S jdk21-openjdk
+**Ubuntu / Debian:**
+sudo apt install openjdk-21-jdk
+**Windows:**
+Download from https://adoptium.net and install normally.
+Verify with:
+java -version
+# Should output: openjdk version "21.x.x"
+
+
+## Step 2 — Clone the 1.21.1 backport
+There is a fork by m3t4f1v3 that already has the backport to 1.21.1 done on
+the `mc_1211` branch. The default branch of that repo is 1.20.1, so you MUST
+specify the branch explicitly:
+git clone --branch mc_1211 --depth 1 https://github.com/m3t4f1v3/voxy.git voxy-mc_1211
+
+
+## Step 3 — Build the mod
+cd voxy-mc_1211
+# Linux/macOS:
+chmod +x gradlew
+./gradlew build
+# Windows:
+gradlew.bat build
+Gradle will download automatically if you do not have it. The build takes
+roughly 2 minutes. You will see some "Cannot remap lambda" warnings — these
+are harmless, ignore them.
+When done you should see:
+BUILD SUCCESSFUL
+The output JAR will be at:
+build/libs/voxy-0.2.14-alpha-<commithash>.jar
+
+
+## Step 4 — Understanding what we just built
+We have not modified any code. We simply compiled the existing backport that
+m3t4f1v3 already did. The result is a standard Fabric JAR of Voxy for 1.21.1.
+This JAR is portable — you can reuse it in any NeoForge 1.21.1 instance
+without building again. Just copy it to your mods folder alongside the 3
+required mods listed in the TL;DR above.
+
+
+## Step 5 — Install the mods
+Copy the following into your NeoForge 1.21.1 mods folder:
+1. voxy-0.2.14-alpha-<commithash>.jar       (the JAR you just built)
+2. connector-2.0.0-beta.14+1.21.1-full.jar  (from Modrinth)
+3. forgified-fabric-api-(...).jar           (from Modrinth)
+4. sodium-neoforge-0.6.13+mc1.21.1.jar     (from Modrinth — NeoForge version!)
+That's it. Launch the game.
+
+
+
+## Common mistakes
+**Using Sodium Fabric instead of Sodium NeoForge:**
+Connector will try to apply Fabric mixins without a refMap and crash at
+startup with an InvalidMixinException. Always use sodium-neoforge.
+**Cloning the wrong branch:**
+The default branch of m3t4f1v3/voxy is mc_1201 (1.20.1). Make sure you
+clone mc_1211.
+**Using Iris:**
+Voxy has Iris support built in but it can conflict. If the game crashes or
+freezes at startup, disable Iris first and test without it.
+
+
+## Confirmed working mod list
+These mods were tested together without issues on NeoForge 21.1.228:
+| Mod                        | Version               | Type      |
+|----------------------------|-----------------------|-----------|
+| NeoForge                   | 21.1.228              | loader    |
+| Voxy                       | 0.2.14-alpha          | Fabric*   |
+| Sinytra Connector          | 2.0.0-beta.14+1.21.1  | NeoForge  |
+| Forgified Fabric API       | 0.116.7+2.2.4+1.21.1  | NeoForge  |
+| Sodium                     | 0.6.13+mc1.21.1       | NeoForge  |
+| Lithium                    | 0.15.3+mc1.21.1       | NeoForge  |
+| Create                     | 6.0.10                | NeoForge  |
+| Create Aeronautics         | 1.1.3                 | NeoForge  |
+| Xaero's Minimap            | 25.3.10               | NeoForge  |
+| Xaero's World Map          | 1.40.11               | NeoForge  |
+| EMI                        | 1.1.22+1.21.1         | NeoForge  |
+| Sable                      | 1.21.1-1.1.3          | NeoForge  |
+*Voxy runs via Sinytra Connector
+
+
+## Credits
+- Original Voxy mod: https://github.com/MCRcortex/voxy
+- 1.21.1 backport: https://github.com/m3t4f1v3/voxy (branch mc_1211)
+- Sinytra Connector: https://modrinth.com/mod/connector
+- Forgified Fabric API: https://modrinth.com/mod/forgified-fabric-api
+---
+---
+# VARIANT — I just want the JAR, I don't want to build anything
+I'm uploading the already built JAR to Google Drive so you don't have to
+build it yourself.
+Download: https://drive.google.com/file/d/1UGgFKlZc84Rm8C--jLRZdUpn__wQj26p/view?usp=sharing
+
+If you use this, skip Steps 1, 2, 3 and 4 entirely. Start from Step 5:
+## Step 5 — Install the mods
+Download the JAR from the link above and copy it into your NeoForge 1.21.1
+mods folder along with these 3 mods from Modrinth:
+
+| Mod                  | Version               | Where to get                                   |
+|----------------------|-----------------------|------------------------------------------------|
+| Sinytra Connector    | 2.0.0-beta.14+1.21.1  | https://modrinth.com/mod/connector             |
+| Forgified Fabric API | 0.116.7+2.2.4+1.21.1  | https://modrinth.com/mod/forgified-fabric-api  |
+| Sodium               | 0.6.13+mc1.21.1       | https://modrinth.com/mod/sodium (NeoForge ver.)|
+
+
+IMPORTANT: Download the NeoForge version of Sodium, NOT the Fabric version.
+That's it. Launch the game. No Java, no Git, no terminal needed.

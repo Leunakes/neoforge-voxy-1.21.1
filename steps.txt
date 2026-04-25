@@ -138,4 +138,3 @@ mods folder along with these 3 mods from Modrinth:
 
 
 IMPORTANT: Download the NeoForge version of Sodium, NOT the Fabric version.
-That's it. Launch the game. No Java, no Git, no terminal needed.

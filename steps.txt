@@ -2,6 +2,10 @@ Actually built it using Claude Code. I told it also to make some instructions fo
 Also, if you see some glitches in the distance, try 1024 render distance for Voxy...
 
 
+-------------------------------------------------------------------------------------------
+Download: https://drive.google.com/file/d/1UGgFKlZc84Rm8C--jLRZdUpn__wQj26p/view?usp=sharing
+-------------------------------------------------------------------------------------------
+
 
 The original mod only supports Fabric, and there is no official
 NeoForge port. This guide explains how to build it yourself for 1.21.1 and run
@@ -123,8 +127,9 @@ These mods were tested together without issues on NeoForge 21.1.228:
 # VARIANT — I just want the JAR, I don't want to build anything
 I'm uploading the already built JAR to Google Drive so you don't have to
 build it yourself.
+-------------------------------------------------------------------------------------------
 Download: https://drive.google.com/file/d/1UGgFKlZc84Rm8C--jLRZdUpn__wQj26p/view?usp=sharing
-
+-------------------------------------------------------------------------------------------
 If you use this, skip Steps 1, 2, 3 and 4 entirely. Start from Step 5:
 ## Step 5 — Install the mods
 Download the JAR from the link above and copy it into your NeoForge 1.21.1
